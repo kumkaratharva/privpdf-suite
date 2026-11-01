@@ -19,6 +19,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +27,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
@@ -35,7 +36,8 @@ jobs:
         run: npm run build
         env:
           VITE_BASE_PATH: /privpdf-suite/
-                - name: Verify preview image
+
+      - name: Verify preview image
         run: |
           echo "Checking generated files..."
           ls -lah dist/
@@ -53,4 +55,3 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
-        
