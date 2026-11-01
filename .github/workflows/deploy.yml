@@ -35,6 +35,12 @@ jobs:
         run: npm run build
         env:
           VITE_BASE_PATH: /privpdf-suite/
+                - name: Verify preview image
+        run: |
+          echo "Checking generated files..."
+          ls -lah dist/
+          test -f dist/og-image.png
+          echo "SUCCESS: og-image.png exists in dist!"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
